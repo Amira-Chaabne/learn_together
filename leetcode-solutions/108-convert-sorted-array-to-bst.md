@@ -1,20 +1,17 @@
 # 108. Convert Sorted Array to Binary Search Tree
 
-**Difficulty**: Easy  
-**Link**: [https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/)
+Difficulty: Easy  
+Link: [https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/)
 
-## Solution Summary
-
-| Aspect               | Value                                                |
-| -------------------- | ---------------------------------------------------- |
-| **Date**             | 2025-02-11                                           |
-| **Language**         | Javscript                                            |
-| **Time Complexity**  | O(n)                                                 |
-| **Space Complexity** | O(log n) average – O(n) worst case (recursion stack) |
-
-## Code
 
 ```javascript
+// -------- SOLUTION by @Youssef --------
+
+// Date: 11-02-2026
+// Language: Javscript
+// Time: O(n)
+// Space: O(log n) average – O(n) worst case (recursion stack)
+
 /**
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {
