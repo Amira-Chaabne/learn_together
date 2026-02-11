@@ -36,3 +36,23 @@ var sortedArrayToBST = function (nums) {
   return tree;
 };
 ```
+
+
+```javascript
+// -------- SOLUTION by @Amira --------
+
+// Date: 11-02-2026
+// one-liner xD
+// Time: O(n)
+// Space: O(log n)
+
+var sortedArrayToBST = function(nums, start = 0, end = nums.length - 1) {
+    if (start > end) return null;
+    const mid = Math.floor((start + end) / 2);
+    return new TreeNode(
+        nums[mid],
+        sortedArrayToBST(nums, start, mid - 1),
+        sortedArrayToBST(nums, mid + 1, end)
+    );
+};
+```
