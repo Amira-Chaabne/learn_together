@@ -1,0 +1,150 @@
+---
+title: React 19 Compiler Basics
+description: Learn what the new React Compiler does under the hood.
+---
+
+## Old Performance Hooks (Before React 19)
+
+Before React 19, React did not automatically optimize performance.
+Every time a component re-rendered, all values and functions were recreated.
+
+This could make applications slower.
+
+To fix this, React introduced special hooks to help developers control
+when things should update.
+
+The most common performance hooks were:
+
+- `useMemo`
+- `useCallback`
+
+---
+
+## useMemo
+
+`useMemo` is used to remember a **value**.
+
+### What does it do?
+
+- It saves the result of a calculation
+- It prevents the calculation from running again on every render
+
+React will only recalculate the value when something changes.
+
+### Why was it needed?
+
+Some calculations are slow.
+If React recalculates them every time, the app becomes slower.
+
+`useMemo` helps avoid this problem.
+
+### Example
+
+```jsx
+const total = useMemo(() => {
+  return calculateTotal(items);
+}, [items]);
+```
+
+In this example:
+
+- `calculateTotal` is only called again when items changes
+- If items stays the same, React reuses the old value
+
+## useCallback
+
+`useCallback` is used to remember a **function**.
+
+### What does it do?
+
+- Stores a function between renders
+- Keeps the same function reference
+- Helps avoid unnecessary re-renders
+
+### Why was it needed?
+
+In React, functions are recreated on every render.
+
+When a function is passed to a child component,
+React thinks it is a new function every time.
+
+This can cause child components to re-render even when nothing changed.
+
+`useCallback` helps keep the function stable.
+
+### Example
+
+```jsx
+const handleClick = useCallback(() => {
+  console.log("Button clicked");
+}, []);
+```
+
+### Explanation
+
+- The `handleClick` function is created only once
+- The same function is reused on every render
+- Child components receive the same function reference
+
+## React 19 Compiler
+
+The React 19 Compiler is a new tool that automatically optimizes your code.
+
+It works at **build time**, not at runtime.
+This means your code is analyzed before it runs in the browser.
+
+The compiler understands:
+
+- which values are expensive to calculate
+- which functions are stable
+- when re-renders are really needed
+
+---
+
+## What does the compiler add?
+
+The compiler adds **automatic optimizations** to your code.
+
+You do not see these changes in your source files.
+They are applied internally during compilation.
+
+The compiler can:
+
+- memoize values automatically
+- keep functions stable
+- reduce unnecessary re-renders
+- make components faster by default
+
+---
+
+## What changes for developers?
+
+With the React Compiler, you can write simpler code.
+
+You no longer need to think about performance all the time.
+
+Instead of writing:
+
+```jsx
+const value = useMemo(() => heavyCalculation(data), [data]);
+```
+
+You can write:
+
+```jsx
+const value = heavyCalculation(data);
+```
+
+The compiler will optimize it for you when it is safe.
+
+###Important to know
+
+- `useMemo` and `useCallback` still exist
+- They are not removed
+- They are still useful in advanced or special cases
+
+But for most applications:
+
+- less manual optimization is needed
+- code is easier to read
+- performance is handled automatically
